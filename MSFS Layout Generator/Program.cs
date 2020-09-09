@@ -36,13 +36,13 @@ namespace MSFSLayoutGenerator
                             content.Size = new FileInfo(file).Length;
                             content.Date = new FileInfo(file).LastWriteTimeUtc.ToFileTimeUtc();
 
-                            if (!relativePath.ToUpper().StartsWith("_CVT_",StringComparison.OrdinalIgnoreCase) && !string.Equals(relativePath, "business.json") && !string.Equals(relativePath, "layout.json") && !string.Equals(relativePath, "manifest.json"))
+                            if (!relativePath.StartsWith("_CVT_", StringComparison.OrdinalIgnoreCase) && !string.Equals(relativePath, "business.json") && !string.Equals(relativePath, "layout.json") && !string.Equals(relativePath, "manifest.json"))
                             {
                                 layout.Content.Add(content);
                             }
                         }
 
-                        if(layout.Content.Count() == 0)
+                        if (layout.Content.Count() == 0)
                         {
                             Utilities.Log("No files were found in the folder containing \"" + layoutPath + "\". The layout.json will not be updated.");
                         }
