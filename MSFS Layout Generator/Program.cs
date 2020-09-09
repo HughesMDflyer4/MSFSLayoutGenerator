@@ -62,6 +62,10 @@ namespace MSFSLayoutGenerator
                             Utilities.Log("Error: " + ex.Message);
                         }
                     }
+                    else
+                    {
+                        Utilities.Log("The file \"" + layoutPath + "\" is not named layout.json and will not be updated.");
+                    }
                 }
             }
         }
