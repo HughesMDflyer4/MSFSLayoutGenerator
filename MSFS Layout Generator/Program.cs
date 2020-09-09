@@ -25,7 +25,7 @@ namespace MSFSLayoutGenerator
                     string layoutPath = Path.GetFullPath(path);
                     string json;
 
-                    if (Path.GetFileName(layoutPath) == "layout.json")
+                    if (string.Equals(Path.GetFileName(layoutPath), "layout.json", StringComparison.OrdinalIgnoreCase))
                     {
                         foreach (string file in Directory.GetFiles(Path.GetDirectoryName(layoutPath), "*.*", SearchOption.AllDirectories))
                         {
@@ -36,13 +36,13 @@ namespace MSFSLayoutGenerator
                             content.Size = new FileInfo(file).Length;
                             content.Date = new FileInfo(file).LastWriteTimeUtc.ToFileTimeUtc();
 
-                            if (!relativePath.StartsWith("_CVT_") && relativePath != "Business.json" && relativePath != "layout.json" && relativePath != "manifest.json")
+                            if (!relativePath.StartsWith("_CVT_", StringComparison.OrdinalIgnoreCase) && !string.Equals(relativePath, "business.json") && !string.Equals(relativePath, "layout.json") && !string.Equals(relativePath, "manifest.json"))
                             {
                                 layout.Content.Add(content);
                             }
                         }
 
-                        if(layout.Content.Count() == 0)
+                        if (layout.Content.Count() == 0)
                         {
                             Utilities.Log("No files were found in the folder containing \"" + layoutPath + "\". The layout.json will not be updated.");
                         }
@@ -55,11 +55,6 @@ namespace MSFSLayoutGenerator
 
                         try
                         {
-                            if (!File.Exists(layoutPath))
-                            {
-                                File.Create(layoutPath).Close();
-                            }
-
                             File.WriteAllText(layoutPath, json.Replace("\r\n", "\n"));
                         }
                         catch (Exception ex)
