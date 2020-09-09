@@ -8,7 +8,7 @@ A. The Virtual File System (VFS) in Microsoft Flight Simulator relies on a layou
 
 ### Q. What does this application do?
 A. The application will create/update a layout.json with all current files in the layout.json file's folder and subfolders. The following information is included with each file entry:
-* File name (including extension)
+* File path relative to layout.json (including extension)
 * Size (in bytes)
 * Last modified time (represented as a [File Time](https://docs.microsoft.com/en-us/windows/win32/sysinfo/file-times))
 
