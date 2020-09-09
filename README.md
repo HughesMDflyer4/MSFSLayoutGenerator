@@ -14,7 +14,9 @@ A. This tool will benefit anyone who creates packages by hand rather than using 
 2. Drag any file named "layout.json" onto the exe.
 3. Launch Microsoft Flight Simulator and check out your changes.
 
-Note: The application will update any number of layout.json files when providing the full path of each file as an argument. This can be useful when updating content across multiple packages. An example is below:
+### Notes
+* The application will only write to files named "layout.json" to avoid accidentally modifying unrelated files.
+* The application will update any number of layout.json files when providing the full path of each file as an argument. This can be useful when updating content across multiple packages. An example is below:
 ```
 MSFSLayoutGenerator.exe "G:\MSFS\Community\example-package-1\layout.json" "G:\MSFS\Community\example-package-2\layout.json"
 ```
