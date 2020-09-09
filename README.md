@@ -25,7 +25,7 @@ A. This application will benefit anyone who creates packages by hand rather than
 #### Notes
 * The existing data in a layout.json will be overwritten/replaced when running the file through this application.
 * The application will only write to files named "layout.json" to avoid accidentally modifying unrelated files.
-* Relative paths for layout.json files are suppported. Example:
+* layout.json paths relative to the folder where the application is running are supported. For example, the application can run from the Desktop, and update a layout.json inside a folder named "ExampleFolder" that is also on the Desktop by providing the layout.json path as follows:
 ```
 C:\Users\Example\Desktop\MSFSLayoutGenerator.exe ExampleFolder\layout.json
 ```
