@@ -33,7 +33,7 @@ A. This application will benefit anyone who creates packages by hand rather than
 ```
 C:\Users\Example\Desktop\MSFSLayoutGenerator.exe ExampleFolder\layout.json
 ```
-* The application will accept a variable number of arguments, allowing multiple multiple layout.json files to be updated at once. Each argument should contain the absolute or relative path of a layout.json to update. Example:
+* The application will accept a variable number of arguments, allowing multiple layout.json files to be updated at once. Each argument should contain the absolute or relative path of a layout.json to update. Example:
 ```
 MSFSLayoutGenerator.exe "G:\MSFS\Community\example-package-1\layout.json" "G:\MSFS\Community\example-package-2\layout.json"
 ```
