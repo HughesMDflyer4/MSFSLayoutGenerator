@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("MSFS Layout Generator")]
-[assembly: AssemblyCopyright("© 2020 Brandon Filer")]
+[assembly: AssemblyCopyright("© 2021 Brandon Filer")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
