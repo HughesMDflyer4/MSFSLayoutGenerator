@@ -105,7 +105,6 @@
   <ItemGroup>
     <Compile Include="Content.cs" />
     <Compile Include="Layout.cs" />
-    <Compile Include="Manifest.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utilities.cs" />
