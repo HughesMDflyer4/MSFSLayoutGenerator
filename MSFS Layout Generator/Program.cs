@@ -38,6 +38,13 @@ namespace MSFSLayoutGenerator
                     {
                         foreach (string file in Directory.GetFiles(Path.GetDirectoryName(layoutPath), "*.*", SearchOption.AllDirectories))
                         {
+                            // Skip clearly temporary or backup files
+                            if (file.EndsWith("~")
+                                || file.StartsWith(".")
+                                || file.EndsWith(".bak", StringComparison.CurrentCultureIgnoreCase)
+                                || file.EndsWith(".tmp", StringComparison.CurrentCultureIgnoreCase))
+                                continue;
+
                             //Certain .NET APIs don't like long file paths, so we check to ensure the length is under the limit.
                             if (file.Length > 259)
                             {
