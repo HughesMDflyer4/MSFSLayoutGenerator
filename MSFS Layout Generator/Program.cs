@@ -46,6 +46,10 @@ namespace MSFSLayoutGenerator
 
                             string relativePath = Utilities.GetRelativePath(file, Path.GetDirectoryName(layoutPath));
 
+                            if (relativePath.StartsWith(@".git/")
+                                || relativePath.StartsWith(@".svn/"))
+                                continue;
+
                             Content content = new Content();
                             content.Path = relativePath;
                             content.Size = new FileInfo(file).Length;
