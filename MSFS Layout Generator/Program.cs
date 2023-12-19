@@ -51,6 +51,13 @@ namespace MSFSLayoutGenerator
                             content.Size = new FileInfo(file).Length;
                             content.Date = new FileInfo(file).LastWriteTimeUtc.ToFileTimeUtc();
                             
+                            //Skip git directory and git related files eg. .gitignore .gitattributes on the root directory
+                            if (relativePath.StartsWith(".git") || file.StartsWith(".git", StringComparison.CurrentCultureIgnoreCase))
+                            {
+                                continue;
+                                
+                            }
+
                             //The MSFS virtual file system doesn't need a few select files/folders to be specified in layout.json, so we omit those.
                             if (!relativePath.StartsWith("_CVT_", StringComparison.OrdinalIgnoreCase) && !string.Equals(relativePath, "business.json") && !string.Equals(relativePath, "layout.json") && !string.Equals(relativePath, "manifest.json"))
                             {

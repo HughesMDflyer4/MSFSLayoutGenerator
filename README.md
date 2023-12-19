@@ -19,6 +19,9 @@ Additionally, if a package contains a manifest.json and the ***total_package_siz
 ### Q. Who is this application for?
 A. This application will benefit anyone who creates packages by hand rather than using the Project Editor in Developer Mode. Livery artists in particular may find this useful, as adding each texture to layout.json manually can be tedious.
 
+### Q. What other files/folders are excluded?
+A. Source control (git) files and folder are excluded. Developers that version control their packages will find this useful.
+
 ## Requirements
 * Windows 10 (x64)
 * .NET Framework 4.7.2
