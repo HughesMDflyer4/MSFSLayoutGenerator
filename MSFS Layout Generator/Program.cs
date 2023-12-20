@@ -50,9 +50,11 @@ namespace MSFSLayoutGenerator
                             content.Path = relativePath;
                             content.Size = new FileInfo(file).Length;
                             content.Date = new FileInfo(file).LastWriteTimeUtc.ToFileTimeUtc();
-                            
+
                             //Skip git directory and git related files eg. .gitignore .gitattributes on the root directory
-                            if (relativePath.StartsWith(".git") || file.StartsWith(".git", StringComparison.CurrentCultureIgnoreCase))
+                            if (relativePath.StartsWith(".git") || 
+                                file.StartsWith(".git", StringComparison.CurrentCultureIgnoreCase) ||
+                                relativePath.EndsWith(".DS_Store", StringComparison.CurrentCultureIgnoreCase))
                             {
                                 continue;
                                 
