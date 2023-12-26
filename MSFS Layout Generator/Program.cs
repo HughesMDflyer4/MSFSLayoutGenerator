@@ -55,11 +55,7 @@ namespace MSFSLayoutGenerator
                             if (!relativePath.StartsWith("_CVT_", StringComparison.OrdinalIgnoreCase) &&
                                 !string.Equals(relativePath, "layout.json") &&
                                 !string.Equals(relativePath, "manifest.json") &&
-                                !string.Equals(relativePath, "MSFSLayoutGenerator.exe") &&
-                                !relativePath.EndsWith("~") &&
-                                !relativePath.StartsWith(".") &&
-                                !relativePath.EndsWith(".bak", StringComparison.OrdinalIgnoreCase) &&
-                                !relativePath.StartsWith(".tmp", StringComparison.OrdinalIgnoreCase))
+                                !string.Equals(relativePath, "MSFSLayoutGenerator.exe"))
                             {
                                 layout.Content.Add(content);
 
