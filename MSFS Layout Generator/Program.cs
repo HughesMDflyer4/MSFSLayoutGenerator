@@ -22,7 +22,7 @@ namespace MSFSLayoutGenerator
                 //Some serialization options to match layout.json as closely as possible to the MSFS format.
                 JsonSerializerOptions jsonOptions = new JsonSerializerOptions();
                 jsonOptions.WriteIndented = true;
-                jsonOptions.Encoder = System.Text.Encodings.Web.JavaScriptEncoder.Create(UnicodeRanges.All);
+                jsonOptions.Encoder = System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping;
 
                 foreach (string path in layoutPaths)
                 {
@@ -52,7 +52,14 @@ namespace MSFSLayoutGenerator
                             content.Date = new FileInfo(file).LastWriteTimeUtc.ToFileTimeUtc();
                             
                             //The MSFS virtual file system doesn't need a few select files/folders to be specified in layout.json, so we omit those.
-                            if (!relativePath.StartsWith("_CVT_", StringComparison.OrdinalIgnoreCase) && !string.Equals(relativePath, "business.json") && !string.Equals(relativePath, "layout.json") && !string.Equals(relativePath, "manifest.json"))
+                            if (!relativePath.StartsWith("_CVT_", StringComparison.OrdinalIgnoreCase) &&
+                                !string.Equals(relativePath, "layout.json") &&
+                                !string.Equals(relativePath, "manifest.json") &&
+                                !string.Equals(relativePath, "MSFSLayoutGenerator.exe") &&
+                                !relativePath.EndsWith("~") &&
+                                !relativePath.StartsWith(".") &&
+                                !relativePath.EndsWith(".bak", StringComparison.OrdinalIgnoreCase) &&
+                                !relativePath.StartsWith(".tmp", StringComparison.OrdinalIgnoreCase))
                             {
                                 layout.Content.Add(content);
 
@@ -61,7 +68,7 @@ namespace MSFSLayoutGenerator
                             }
 
                             //The size of these files must be considered for total_package_size as well
-                            if(string.Equals(relativePath, "business.json") || string.Equals(relativePath, "manifest.json"))
+                            if(string.Equals(relativePath, "manifest.json"))
                             {
                                 totalPackageSize += content.Size;
                             }
@@ -96,7 +103,7 @@ namespace MSFSLayoutGenerator
 
                             try
                             {
-                                manifest = JsonSerializer.Deserialize<Dictionary<string, object>>(File.ReadAllText(manifestPath));
+                                manifest = JsonSerializer.Deserialize<Dictionary<string, object>>(File.ReadAllText(manifestPath), jsonOptions);
                             }
                             catch (Exception ex)
                             {
