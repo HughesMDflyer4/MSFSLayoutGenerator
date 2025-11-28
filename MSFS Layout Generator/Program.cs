@@ -1,18 +1,38 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
-using System.IO;
 using System.Text.Json;
 using System.Text.Unicode;
+using System.Threading.Tasks;
 
 namespace MSFSLayoutGenerator
 {
     class Program
     {
+        public static bool AreLongPathsEnabled()
+        {
+            try
+            {
+                using (RegistryKey key = Registry.LocalMachine.OpenSubKey(@"SYSTEM\CurrentControlSet\Control\FileSystem"))
+                {
+                    if (key != null)
+                    {
+                        object value = key.GetValue("LongPathsEnabled");
+                        if (value != null && value is int intValue)
+                        {
+                            return intValue == 1;
+                        }
+                    }
+                }
+            }
+            catch { }
+            return false;
+        }
         static void Main(string[] layoutPaths)
-        {            
+        {
             if(layoutPaths.Count() == 0)
             {
                 Utilities.Log(new string[] { "No layout.json paths specified.", "Usage: MSFSLayoutGenerator.exe <layout.json> ..." });
@@ -39,7 +59,7 @@ namespace MSFSLayoutGenerator
                         foreach (string file in Directory.GetFiles(Path.GetDirectoryName(layoutPath), "*.*", SearchOption.AllDirectories))
                         {
                             //Certain .NET APIs don't like long file paths, so we check to ensure the length is under the limit.
-                            if (file.Length > 259)
+                            if (file.Length > 259 && AreLongPathsEnabled() == false)
                             {
                                 Utilities.Log("One or more file paths in the folder containing \"" + layoutPath + "\" are 260 characters or greater in length. Please move this package to a directory with a shorter path or enable long paths in Windows.\nTo do so, visit https://learn.microsoft.com/en-us/windows/win32/fileio/maximum-file-path-limitation?tabs=registry#enable-long-paths-in-windows-10-version-1607-and-later");                                
                             }
