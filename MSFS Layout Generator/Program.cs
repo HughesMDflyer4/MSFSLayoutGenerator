@@ -12,7 +12,7 @@ namespace MSFSLayoutGenerator
     class Program
     {
         static void Main(string[] layoutPaths)
-        {
+        {            
             if(layoutPaths.Count() == 0)
             {
                 Utilities.Log(new string[] { "No layout.json paths specified.", "Usage: MSFSLayoutGenerator.exe <layout.json> ..." });
@@ -31,7 +31,7 @@ namespace MSFSLayoutGenerator
                     //Get absolute path in case we have a relative path.
                     string layoutPath = Path.GetFullPath(path);
                     string json;
-                    long totalPackageSize = 0;
+                    long totalPackageSize = 0;                    
 
                     //Ensure that the specified file is named "layout.json".
                     if (string.Equals(Path.GetFileName(layoutPath), "layout.json", StringComparison.OrdinalIgnoreCase))
@@ -41,7 +41,7 @@ namespace MSFSLayoutGenerator
                             //Certain .NET APIs don't like long file paths, so we check to ensure the length is under the limit.
                             if (file.Length > 259)
                             {
-                                Utilities.Log("One or more file paths in the folder containing \"" + layoutPath + "\" are 260 characters or greater in length. Please move this package to a directory with a shorter path.");
+                                Utilities.Log("One or more file paths in the folder containing \"" + layoutPath + "\" are 260 characters or greater in length. Please move this package to a directory with a shorter path or enable long paths in Windows.\nTo do so, visit https://learn.microsoft.com/en-us/windows/win32/fileio/maximum-file-path-limitation?tabs=registry#enable-long-paths-in-windows-10-version-1607-and-later");                                
                             }
 
                             string relativePath = Utilities.GetRelativePath(file, Path.GetDirectoryName(layoutPath));
